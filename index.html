@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FourTwins Kost | Property Management</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #181A1D;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #D4AF37;
+      border-radius: 4px;
+    }
+
+    .photo-cover { background-size: cover; background-position: center; }
+    .dashboard-hero {
+      background-image: linear-gradient(90deg, rgba(17,24,39,.94) 0%, rgba(17,24,39,.76) 48%, rgba(17,24,39,.12) 100%),
+      url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85');
+      background-size: cover; background-position: center 54%;
+    }
+    .login-photo {
+      background-image: linear-gradient(135deg, rgba(17,24,39,.94), rgba(17,24,39,.68)),
+      url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85');
+      background-size: cover; background-position: center;
+    }
+    .room-photo { height: 112px; background-size: cover; background-position: center; }
+    .soft-grid {
+      background-image: radial-gradient(rgba(212,175,55,.22) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    .glass-chip { background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px); }
+    .lift-card { transition: transform .22s ease, box-shadow .22s ease; }
+    .lift-card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(15,23,42,.10); }
+    .landing-hero { background-image: linear-gradient(90deg,rgba(15,23,42,.92),rgba(15,23,42,.62)),url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90'); background-size:cover; background-position:center; }
+    .landing-pattern { background-image: radial-gradient(rgba(212,175,55,.18) 1px,transparent 1px); background-size:18px 18px; }
+
+  </style>
+</head>
+<body class="bg-[#FAF8F5] text-[#1E2022] font-sans antialiased">
+
+  <!-- ==================== PUBLIC LANDING PAGE ==================== -->
+  <section id="landingPage" class="min-h-screen bg-[#FAF8F5]">
+    <nav class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3" onclick="returnToLanding();return false;">
+        <span class="w-11 h-11 rounded-xl bg-[#D4AF37] text-[#111827] flex items-center justify-center font-black text-xl">4T</span>
+        <span><strong class="block tracking-wide text-lg">FOUR<span class="text-[#B68B20]">TWINS</span></strong><small class="text-[10px] tracking-[.22em] text-slate-500 uppercase">Kost Modern & Nyaman</small></span>
+      </a>
+      <button onclick="showLoginModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-sm font-bold hover:border-[#D4AF37] hover:text-[#9A7418] transition"><i class="fa-solid fa-lock mr-2"></i>Login Admin / Owner / Penghuni</button>
+    </nav>
+    <div class="landing-hero min-h-[590px] flex items-center text-white">
+      <div class="max-w-7xl mx-auto w-full px-6 py-20">
+        <div class="max-w-2xl">
+          <span class="inline-flex items-center gap-2 glass-chip rounded-full px-4 py-2 text-xs font-bold tracking-widest uppercase text-[#F4D77D]"><i class="fa-solid fa-house"></i> Your Comfortable Living</span>
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mt-6">Temukan Hunian Nyaman di <span class="text-[#E4C15B]">FourTwins Kost</span></h1>
+          <p class="text-slate-200 text-base md:text-lg leading-relaxed mt-5 max-w-xl">Tempat tinggal modern dengan suasana nyaman, fasilitas terawat, dan layanan penghuni yang mudah diakses.</p>
+          <div class="flex flex-wrap gap-3 mt-8">
+            <button onclick="enterTenantPortal()" class="px-7 py-3.5 bg-[#D4AF37] hover:bg-[#C59B27] text-[#111827] font-extrabold rounded-xl shadow-lg transition"><i class="fa-solid fa-house-user mr-2"></i>Login Penghuni</button>
+            <a href="#fasilitas" class="px-7 py-3.5 border border-white/50 hover:bg-white/10 text-white font-bold rounded-xl transition">Jelajahi Fasilitas</a>
+          </div>
+          <div class="flex flex-wrap gap-8 mt-12 text-sm text-slate-200"><span><i class="fa-solid fa-wifi text-[#E4C15B] mr-2"></i>Wi-Fi</span><span><i class="fa-solid fa-snowflake text-[#E4C15B] mr-2"></i>AC</span><span><i class="fa-solid fa-shield-halved text-[#E4C15B] mr-2"></i>Lingkungan nyaman</span></div>
+        </div>
+      </div>
+    </div>
+    <section id="fasilitas" class="max-w-7xl mx-auto px-6 py-16">
+      <div class="text-center mb-10"><p class="text-xs font-extrabold tracking-[.25em] text-[#B68B20] uppercase">FourTwins Experience</p><h2 class="text-3xl font-extrabold mt-2">Kenyamanan untuk Setiap Hari</h2><p class="text-slate-500 mt-3">Hunian praktis dengan fasilitas untuk mendukung aktivitas Anda.</p></div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 lift-card"><img class="h-52 w-full object-cover" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=85" alt="Interior ruang nyaman"><div class="p-5"><h3 class="font-extrabold text-lg">Interior Nyaman</h3><p class="text-sm text-slate-500 mt-2">Ruang tinggal tertata dengan suasana hangat dan modern.</p></div></article>
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 lift-card"><img class="h-52 w-full object-cover" src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=900&q=85" alt="Kamar modern"><div class="p-5"><h3 class="font-extrabold text-lg">Kamar Fungsional</h3><p class="text-sm text-slate-500 mt-2">Ruang pribadi untuk beristirahat dan beraktivitas.</p></div></article>
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 lift-card"><img class="h-52 w-full object-cover" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=85" alt="Area hunian"><div class="p-5"><h3 class="font-extrabold text-lg">Lingkungan Terawat</h3><p class="text-sm text-slate-500 mt-2">Pengelolaan fasilitas dan layanan penghuni yang praktis.</p></div></article>
+      </div>
+    </section>
+
+    <section id="pilih-kamar" class="max-w-7xl mx-auto px-6 py-16">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div><p class="text-xs font-extrabold tracking-[.25em] text-[#B68B20] uppercase">Pilihan Hunian</p><h2 class="text-3xl font-extrabold mt-2">Pilih Kamar Favorit Anda</h2><p class="text-slate-500 mt-2">Lihat pilihan kamar, tarif bulanan, dan status ketersediaan.</p></div>
+        <a href="#kontak" class="text-sm font-bold text-[#9A7418] hover:underline">Tanya ketersediaan <i class="fa-solid fa-arrow-right ml-1"></i></a>
+      </div>
+      <div id="publicRoomGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+      <p class="text-xs text-slate-400 mt-4">*Tarif dan status kamar mengikuti data contoh aplikasi. Konfirmasi ketersediaan dan harga terbaru kepada pengelola.</p>
+    </section>
+    <section class="bg-white border-y border-slate-100">
+      <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="text-center mb-10"><p class="text-xs font-extrabold tracking-[.25em] text-[#B68B20] uppercase">Fasilitas & Informasi</p><h2 class="text-3xl font-extrabold mt-2">Semua yang Anda Butuhkan</h2></div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-slate-100"><i class="fa-solid fa-wifi text-2xl text-[#B68B20]"></i><h3 class="font-bold mt-3">Wi-Fi</h3><p class="text-sm text-slate-500 mt-1">Akses internet untuk aktivitas sehari-hari.</p></div>
+          <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-slate-100"><i class="fa-regular fa-snowflake text-2xl text-[#B68B20]"></i><h3 class="font-bold mt-3">AC</h3><p class="text-sm text-slate-500 mt-1">Kenyamanan suhu di dalam kamar.</p></div>
+          <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-slate-100"><i class="fa-solid fa-bed text-2xl text-[#B68B20]"></i><h3 class="font-bold mt-3">Kamar Pribadi</h3><p class="text-sm text-slate-500 mt-1">Pilihan ruang pribadi dengan beberapa variasi tarif.</p></div>
+          <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-slate-100"><i class="fa-solid fa-headset text-2xl text-[#B68B20]"></i><h3 class="font-bold mt-3">Layanan Pengelola</h3><p class="text-sm text-slate-500 mt-1">Hubungi pengelola untuk informasi dan bantuan.</p></div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 mt-8">
+          <div class="rounded-2xl p-6 bg-[#111827] text-white"><h3 class="font-bold text-lg"><i class="fa-solid fa-clipboard-list text-[#E4C15B] mr-2"></i>Informasi Sewa</h3><ul class="text-sm text-slate-300 space-y-2 mt-4"><li><i class="fa-solid fa-check text-[#E4C15B] mr-2"></i>Sistem sewa bulanan</li><li><i class="fa-solid fa-check text-[#E4C15B] mr-2"></i>Pilihan kamar dengan tarif berbeda</li><li><i class="fa-solid fa-check text-[#E4C15B] mr-2"></i>Konfirmasi ketersediaan melalui WhatsApp</li><li><i class="fa-solid fa-check text-[#E4C15B] mr-2"></i>Layanan laporan penghuni melalui portal</li></ul></div>
+          <div class="rounded-2xl p-6 bg-[#FAF8F5] border border-slate-200"><h3 class="font-bold text-lg text-slate-800"><i class="fa-solid fa-circle-info text-[#B68B20] mr-2"></i>Proses Pemesanan</h3><ol class="text-sm text-slate-600 space-y-2 mt-4 list-decimal list-inside"><li>Pilih kamar yang tersedia.</li><li>Kirim pertanyaan atau minat sewa melalui WhatsApp.</li><li>Jadwalkan kunjungan dan survei kamar.</li><li>Konfirmasi persyaratan serta pembayaran dengan pengelola.</li></ol></div>
+        </div>
+      </div>
+    </section>
+    <section id="kontak" class="max-w-7xl mx-auto px-6 py-16">
+      <div class="grid lg:grid-cols-2 gap-8 items-stretch">
+        <div class="rounded-3xl bg-[#111827] text-white p-8 md:p-10">
+          <p class="text-xs font-extrabold tracking-[.25em] text-[#E4C15B] uppercase">Hubungi Kami</p><h2 class="text-3xl font-extrabold mt-3">Ada Pertanyaan? Kami Siap Membantu.</h2><p class="text-slate-300 mt-3 text-sm leading-relaxed">Hubungi pengelola untuk mengecek kamar kosong, tarif terbaru, jadwal survei, dan informasi aturan kost.</p>
+          <div class="space-y-4 mt-8 text-sm"><div class="flex gap-3"><i class="fa-brands fa-whatsapp text-[#4ade80] text-xl"></i><div><b>WhatsApp Pengelola</b><p class="text-slate-400">Respon informasi dan reservasi kamar</p></div></div><div class="flex gap-3"><i class="fa-regular fa-clock text-[#E4C15B] text-xl"></i><div><b>Jam layanan</b><p class="text-slate-400">08.00–20.00 WITA (informasi contoh)</p></div></div><div class="flex gap-3"><i class="fa-solid fa-location-dot text-[#E4C15B] text-xl"></i><div><b>Lokasi FourTwins Kost</b><p class="text-slate-400">Cari lokasi melalui Google Maps; pastikan alamat/pin diperbarui oleh pengelola.</p></div></div></div>
+          <a id="publicWhatsApp" href="https://wa.me/6281234567890?text=Halo%20FourTwins%20Kost%2C%20saya%20ingin%20bertanya%20tentang%20kamar." target="_blank" rel="noopener" class="inline-flex items-center gap-3 mt-8 px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 rounded-xl font-extrabold shadow-lg"><i class="fa-brands fa-whatsapp text-xl"></i>Chat WhatsApp Sekarang</a>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-slate-200 bg-slate-100 min-h-[420px] flex flex-col">
+          <div class="p-5 bg-white"><h3 class="font-extrabold text-slate-800"><i class="fa-solid fa-map-location-dot text-[#B68B20] mr-2"></i>Peta Lokasi</h3><p class="text-xs text-slate-500 mt-1">Peta pencarian FourTwins Kost. Pin akurat memerlukan alamat lengkap dari pengelola.</p></div>
+          <iframe title="Peta pencarian FourTwins Kost" class="w-full flex-1 min-h-[330px]" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=FourTwins%20Kost&output=embed"></iframe>
+          <a href="https://www.google.com/maps/search/?api=1&query=FourTwins+Kost" target="_blank" rel="noopener" class="p-4 bg-white text-sm text-[#9A7418] font-bold hover:underline">Buka pencarian di Google Maps <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-[#181A1D] text-slate-400 text-center px-6 py-7 text-xs">© 2026 FourTwins Kost. Stay in Comfort. <span class="block mt-2">Informasi alamat, nomor WhatsApp, tarif, dan fasilitas dapat disesuaikan oleh pengelola.</span></footer>
+  </section>
+
+  <!-- ==================== ADMIN / OWNER LOGIN ==================== -->
+  <div id="loginPortal" class="fixed inset-0 bg-[#111827]/95 backdrop-blur-md z-50 items-center justify-center p-4 hidden">
+    <div class="login-photo rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-[#D4AF37]/30 text-white">
+      <div class="bg-gradient-to-r from-[#111827] via-[#1E2022] to-[#111827] p-7 text-center relative border-b border-[#D4AF37]/20">
+        <div class="w-14 h-14 bg-[#D4AF37]/10 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-[#D4AF37]/40"><i class="fa-solid font-bold text-2xl text-[#D4AF37]">4T</i></div>
+        <h2 class="text-2xl font-bold tracking-tight">FOUR<span class="text-[#D4AF37]">TWINS</span></h2><p class="text-xs uppercase tracking-widest text-[#D4AF37]/80 mt-1">Portal Pengelola</p>
+      </div>
+      <form id="formLogin" onsubmit="handleLogin(event)" class="p-6 space-y-4">
+        <div><label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Masuk sebagai</label><div class="grid grid-cols-3 gap-2">
+          <label class="cursor-pointer"><input type="radio" name="role" value="admin" class="peer hidden" checked onchange="updateDefaultUsername('Admin (Pengelola)')"><div class="p-3 text-center rounded-xl border-2 border-slate-700 peer-checked:border-[#D4AF37] peer-checked:bg-[#D4AF37]/10 peer-checked:text-[#D4AF37]"><i class="fa-solid fa-user-shield text-lg mb-1 block"></i><span class="text-xs font-semibold">Admin</span></div></label>
+          <label class="cursor-pointer"><input type="radio" name="role" value="pemilik" class="peer hidden" onchange="updateDefaultUsername('Pemilik Kost')"><div class="p-3 text-center rounded-xl border-2 border-slate-700 peer-checked:border-[#D4AF37] peer-checked:bg-[#D4AF37]/10 peer-checked:text-[#D4AF37]"><i class="fa-solid fa-crown text-lg mb-1 block"></i><span class="text-xs font-semibold">Owner</span></div></label>
+          <label class="cursor-pointer"><input type="radio" name="role" value="penghuni" class="peer hidden" onchange="updateDefaultUsername('Nama Penghuni');toggleTenantRoomField()"><div class="p-3 text-center rounded-xl border-2 border-slate-700 peer-checked:border-[#D4AF37] peer-checked:bg-[#D4AF37]/10 peer-checked:text-[#D4AF37]"><i class="fa-solid fa-house-user text-lg mb-1 block"></i><span class="text-xs font-semibold">Penghuni</span></div></label>
+        </div></div>
+        <div><label id="loginUsernameLabel" class="block text-xs font-bold text-slate-400 uppercase mb-1">Nama Pengguna</label><input type="text" id="loginUsername" value="Admin (Pengelola)" required class="w-full px-4 py-3 rounded-xl border border-slate-700 bg-[#111827] text-white text-sm"></div>
+        <div id="tenantRoomField" class="hidden"><label class="block text-xs font-bold text-slate-400 uppercase mb-1">Pilih Kamar Terdaftar</label><select id="tenantRoomSelect" class="w-full px-4 py-3 rounded-xl border border-slate-700 bg-[#111827] text-white text-sm"><option value="">Pilih kamar Anda</option></select><p class="text-[11px] text-slate-400 mt-1">Pilih kamar yang saat ini Anda tempati.</p></div>
+        <div><label class="block text-xs font-bold text-slate-400 uppercase mb-1">Password</label><input type="password" id="loginPassword" placeholder="Masukkan password" required class="w-full px-4 py-3 rounded-xl border border-slate-700 bg-[#111827] text-white text-sm"><p id="loginError" class="text-xs text-red-400 mt-2 hidden">Password salah. Silakan coba lagi.</p></div>
+        <button type="submit" class="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-[#C59B27] text-[#111827] font-extrabold rounded-xl">Masuk ke Dashboard <i class="fa-solid fa-arrow-right ml-2"></i></button>
+        <button type="button" onclick="returnToLanding()" class="w-full py-2 text-slate-300 text-sm hover:text-white"><i class="fa-solid fa-arrow-left mr-2"></i>Kembali ke Landing Page</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN APPLICATION CONTAINER ==================== -->
+  <div id="appContainer" class="min-h-screen flex flex-col md:flex-row hidden">
+
+    <!-- SIDEBAR NAV -->
+    <aside class="w-full md:w-64 bg-[#181A1D] text-white flex-shrink-0 flex flex-col justify-between border-r border-[#D4AF37]/20">
+      <div>
+        <!-- Brand Header -->
+        <div class="p-5 flex items-center space-x-3 border-b border-slate-800">
+          <div class="w-10 h-10 bg-gradient-to-br from-[#D4AF37] to-[#C59B27] rounded-xl flex items-center justify-center font-black text-[#111827] text-xl shadow-md">
+            4T
+          </div>
+          <div>
+            <h1 class="font-bold text-lg leading-none tracking-wide">FOUR<span class="text-[#D4AF37]">TWINS</span></h1>
+            <span class="text-[10px] text-[#D4AF37]/80 uppercase tracking-widest font-semibold">FourTwins Kost • Stay in Comfort</span>
+          </div>
+        </div>
+
+        <!-- User Role Profile Badge -->
+        <div class="mx-4 my-4 p-3 bg-[#111827] rounded-xl border border-slate-800 flex items-center space-x-3">
+          <div id="userBadgeIcon" class="w-8 h-8 rounded-lg bg-[#D4AF37]/20 text-[#D4AF37] flex items-center justify-center font-bold">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+          <div class="overflow-hidden">
+            <div id="currentUserName" class="text-xs font-bold text-slate-200 truncate">Admin (Pengelola)</div>
+            <div id="currentUserRole" class="text-[10px] text-[#D4AF37] uppercase font-semibold tracking-wider">MODERATOR</div>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="px-3 space-y-1">
+          <!-- Admin & Pemilik Links -->
+          <div id="adminNavLinks" class="space-y-1">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-[#111827] bg-[#D4AF37] shadow-md font-bold">
+              <i class="fa-solid fa-chart-pie w-5"></i>
+              <span>Ringkasan Dashboard</span>
+            </button>
+            <button onclick="switchTab('kamar')" id="nav-kamar" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+              <i class="fa-solid fa-door-closed w-5"></i>
+              <span>Daftar 10 Kamar</span>
+            </button>
+            <button onclick="switchTab('keuangan')" id="nav-keuangan" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+              <i class="fa-solid fa-wallet w-5"></i>
+              <span>Pencatatan Keuangan</span>
+            </button>
+            <button onclick="switchTab('keluhan')" id="nav-keluhan" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+              <i class="fa-solid fa-triangle-exclamation w-5"></i>
+              <span>Laporan Keluhan</span>
+            </button>
+          </div>
+
+          <!-- Penghuni Specific Navigation Links -->
+          <div id="penghuniNavLinks" class="space-y-1 hidden">
+            <button onclick="switchTab('tenant-view')" id="nav-tenant-view" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-[#111827] bg-[#D4AF37] shadow-md font-bold">
+              <i class="fa-solid fa-house-user w-5"></i>
+              <span>Portal Saya (Kamar 105)</span>
+            </button>
+            <button onclick="switchTab('keluhan')" id="nav-tenant-keluhan" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition">
+              <i class="fa-solid fa-comment-dots w-5"></i>
+              <span>Kirim Pengaduan</span>
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Logout / Switch Role Button -->
+      <div class="p-4 border-t border-slate-800">
+        <button onclick="returnToLanding()" class="w-full flex items-center justify-center space-x-2 px-3 py-2.5 bg-[#111827] hover:bg-red-600/20 hover:text-red-400 text-slate-400 text-xs font-semibold rounded-xl border border-slate-700 transition">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Kembali ke Beranda</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 bg-[#FAF8F5] flex flex-col h-screen overflow-y-auto custom-scrollbar">
+
+      <!-- TOP HEADER BAR -->
+      <header class="bg-white border-b border-slate-200 sticky top-0 z-30 px-6 py-4 flex items-center justify-between shadow-sm">
+        <div>
+          <h2 id="headerTitle" class="text-xl font-bold text-[#1E2022]">Ringkasan Dashboard</h2>
+          <p id="headerSubtitle" class="text-xs text-slate-500">FourTwins Kost • Pemantauan Kamar & Operasional</p>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <button id="btnTambahModal" onclick="openModalCheckIn()" class="bg-gradient-to-r from-[#D4AF37] to-[#C59B27] hover:from-[#C59B27] hover:to-[#B8860B] text-[#111827] text-xs font-extrabold px-4 py-2.5 rounded-xl shadow-md transition flex items-center space-x-2">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Check-In Penghuni Baru</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- VIEW 1: DASHBOARD OVERVIEW -->
+      <section id="view-dashboard" class="p-6 space-y-6">
+        <!-- Stats Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Total Kamar -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Kapasitas</p>
+                <h3 class="text-2xl font-black text-slate-800 mt-1">10 Kamar</h3>
+              </div>
+              <div class="w-10 h-10 bg-[#D4AF37]/10 text-[#C59B27] rounded-xl flex items-center justify-center font-bold border border-[#D4AF37]/30">
+                <i class="fa-solid fa-building"></i>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-3"><i class="fa-solid fa-circle-info text-[#D4AF37] mr-1"></i>Tetap 10 Kamar</p>
+          </div>
+
+          <!-- Terisi -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Kamar Terisi</p>
+                <h3 id="statTerisi" class="text-2xl font-black text-emerald-600 mt-1">8 Kamar</h3>
+              </div>
+              <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center font-bold border border-emerald-200">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+            </div>
+            <p class="text-xs text-emerald-600 font-medium mt-3"><i class="fa-solid fa-chart-line mr-1"></i>80% Tingkat Keterisian</p>
+          </div>
+
+          <!-- Kosong -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Kamar Kosong</p>
+                <h3 id="statKosong" class="text-2xl font-black text-amber-500 mt-1">2 Kamar</h3>
+              </div>
+              <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center font-bold border border-amber-200">
+                <i class="fa-solid fa-bed"></i>
+              </div>
+            </div>
+            <p class="text-xs text-amber-600 font-medium mt-3"><i class="fa-solid fa-door-open mr-1"></i>Siap Untuk Disewakan</p>
+          </div>
+
+          <!-- Pemasukan Bulan Ini -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Estimasi Pemasukan</p>
+                <h3 id="statPendapatan" class="text-xl font-black text-[#111827] mt-1">Rp 12.500.000</h3>
+              </div>
+              <div class="w-10 h-10 bg-[#111827] text-[#D4AF37] rounded-xl flex items-center justify-center font-bold">
+                <i class="fa-solid fa-coins"></i>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400 mt-3">Akumulasi sewa 10 kamar</p>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-2">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="font-bold text-slate-800 text-sm">Grafik Ringkasan Pemasukan per Kamar (Rp)</h3>
+              <span class="text-xs font-semibold bg-[#D4AF37]/20 text-[#C59B27] px-2.5 py-1 rounded-lg">FourTwins Kost</span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="barChartKamar"></canvas>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <h3 class="font-bold text-slate-800 text-sm mb-4">Rasio Keterisian Kamar</h3>
+            <div class="h-48 relative my-auto">
+              <canvas id="doughnutChartKamar"></canvas>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-center text-xs mt-4 pt-3 border-t border-slate-100">
+              <div class="p-2 bg-emerald-50 rounded-xl">
+                <span class="block text-slate-500">Terisi</span>
+                <span class="font-bold text-emerald-700 text-sm">8 Kamar</span>
+              </div>
+              <div class="p-2 bg-amber-50 rounded-xl">
+                <span class="block text-slate-500">Kosong</span>
+                <span class="font-bold text-amber-700 text-sm">2 Kamar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="relative overflow-hidden rounded-2xl min-h-[150px] lift-card">
+            <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=900&q=80" alt="Interior kamar modern" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/10 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white"><p class="text-[10px] uppercase tracking-[.18em] text-amber-200">Room design</p><p class="font-bold">Ruang nyaman untuk beristirahat</p></div>
+          </div>
+          <div class="relative overflow-hidden rounded-2xl min-h-[150px] lift-card">
+            <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80" alt="Ruang hunian minimalis" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/10 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white"><p class="text-[10px] uppercase tracking-[.18em] text-amber-200">Living space</p><p class="font-bold">Desain bersih dan fungsional</p></div>
+          </div>
+          <div class="relative overflow-hidden rounded-2xl min-h-[150px] lift-card">
+            <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=900&q=80" alt="Area bersama properti" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/10 to-transparent"></div>
+            <div class="absolute bottom-4 left-4 text-white"><p class="text-[10px] uppercase tracking-[.18em] text-amber-200">Shared area</p><p class="font-bold">Area bersama yang welcoming</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: DAFTAR 10 KAMAR -->
+      <section id="view-kamar" class="p-6 space-y-6 hidden">
+        <!-- Room Control & Filter Bar -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex space-x-2">
+            <button onclick="filterKamar('all')" class="btn-filter-kamar px-4 py-2 bg-[#111827] text-white rounded-xl text-xs font-bold transition">Semua (10)</button>
+            <button onclick="filterKamar('terisi')" class="btn-filter-kamar px-4 py-2 bg-slate-100 text-slate-600 hover:bg-slate-200 rounded-xl text-xs font-bold transition">Terisi (8)</button>
+            <button onclick="filterKamar('kosong')" class="btn-filter-kamar px-4 py-2 bg-slate-100 text-slate-600 hover:bg-slate-200 rounded-xl text-xs font-bold transition">Kosong (2)</button>
+          </div>
+          <div class="text-xs text-slate-500 italic">
+            *Harga kamar dan nomor WhatsApp penghuni dapat disesuaikan per unit.
+          </div>
+        </div>
+
+        <!-- 10 Room Grid Container -->
+        <div id="roomGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+          <!-- Dynamically Injected by JS -->
+        </div>
+      </section>
+
+      <!-- VIEW 3: CATATAN KEUANGAN & PEMBAYARAN -->
+      <section id="view-keuangan" class="p-6 space-y-6 hidden">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-5 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 class="font-bold text-slate-800">Catatan Tagihan & Pembayaran Sewa</h3>
+              <p class="text-xs text-slate-500">Daftar transaksi sewa manual 10 kamar FourTwins Kost</p>
+            </div>
+            <button onclick="openModalCheckIn()" class="px-4 py-2 bg-[#111827] hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition flex items-center space-x-2">
+              <i class="fa-solid fa-user-plus"></i>
+              <span>Check-In Baru</span>
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-600">
+              <thead class="bg-slate-50 uppercase text-[10px] font-bold text-slate-500 border-b border-slate-200">
+                <tr>
+                  <th class="p-4">Kamar</th>
+                  <th class="p-4">Nama Penghuni</th>
+                  <th class="p-4">No. WhatsApp</th>
+                  <th class="p-4">Harga Sewa / Bulan</th>
+                  <th class="p-4">Jatuh Tempo</th>
+                  <th class="p-4">Status Bayar</th>
+                  <th class="p-4 text-center">Aksi & Kontak WA</th>
+                </tr>
+              </thead>
+              <tbody id="tableKeuanganBody" class="divide-y divide-slate-100">
+                <!-- Injected dynamically by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: PENGADUAN & KELUHAN -->
+      <section id="view-keluhan" class="p-6 space-y-6 hidden">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+            <div>
+              <h3 class="font-bold text-slate-800">Laporan Keluhan & Kerusakan</h3>
+              <p class="text-xs text-slate-500">Pusat pesan fasilitas dari penghuni FourTwins Kost</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <!-- Tombol Hubungi Admin via WhatsApp -->
+              <a href="https://wa.me/6281234567890?text=Halo%20Admin%20FourTwins%20Kost,%20saya%20ingin%20berkonsultasi%20mengenai%20kendala%20di%20kost." target="_blank" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-md transition flex items-center space-x-2">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+                <span>Hubungi Admin WA</span>
+              </a>
+              <button onclick="openModalKeluhanBaru()" class="px-4 py-2 bg-[#D4AF37] hover:bg-[#C59B27] text-[#111827] text-xs font-bold rounded-xl shadow-md transition flex items-center space-x-2">
+                <i class="fa-solid fa-bullhorn"></i>
+                <span>Buat Laporan Baru</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- List Keluhan Cards -->
+          <div id="keluhanList" class="space-y-3">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: TENANT/PENGHUNI SPECIFIC PORTAL -->
+      <section id="view-tenant-view" class="p-6 space-y-6 hidden">
+        <div class="bg-gradient-to-r from-[#111827] via-[#1E2022] to-[#111827] text-white p-6 rounded-3xl shadow-xl border border-[#D4AF37]/30">
+          <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+            <div>
+              <span class="inline-block px-3 py-1 bg-[#D4AF37] text-[#111827] text-[10px] font-black rounded-full uppercase tracking-wider mb-2">Penghuni Aktif</span>
+              <h2 id="tenantWelcome" class="text-2xl font-bold">Selamat Datang, Penghuni!</h2>
+              <p class="text-xs text-slate-300 mt-1">Anda terdaftar di <strong id="tenantRoomLabel" class="text-[#D4AF37]">Kamar Anda</strong> • FourTwins Kost</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 text-right">
+              <span class="text-xs text-slate-300 block">Tarif Sewa Kamar Anda:</span>
+              <span id="tenantRoomPrice" class="text-2xl font-black text-[#D4AF37]">Rp 0 <span class="text-xs font-normal text-white">/bln</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tenant Cards Status -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Card Informational Tagihan -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 text-sm mb-3">Status Tagihan Sewa Bulan Ini</h3>
+            <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-between">
+              <div>
+                <span class="text-xs font-semibold text-emerald-800 block">Status Pembayaran:</span>
+                <span id="tenantPaymentStatus" class="text-lg font-bold text-emerald-600">STATUS</span>
+                <span id="tenantDueDate" class="text-[11px] text-slate-500 block mt-1">Jatuh tempo mengikuti data akun Anda</span>
+              </div>
+              <div class="w-12 h-12 bg-emerald-500 text-white rounded-full flex items-center justify-center text-xl">
+                <i class="fa-solid fa-check"></i>
+              </div>
+            </div>
+
+            <div class="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2 text-xs">
+              <div class="font-bold text-slate-700">Info Pembayaran Manual Transfer:</div>
+              <div class="flex justify-between text-slate-600">
+                <span>Bank BCA:</span>
+                <strong class="font-mono text-slate-800">8830-9921-12</strong>
+              </div>
+              <div class="flex justify-between text-slate-600">
+                <span>Atas Nama:</span>
+                <strong class="text-slate-800">Pemilik FourTwins Kost</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Complaint / Contact Owner -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <h3 class="font-bold text-slate-800 text-sm mb-2">Bantuan & Hubungi Pengelola</h3>
+              <p class="text-xs text-slate-500 mb-4">Jika ada kendala fasilitas di Kamar 105 atau pertanyaan sewa, hubungi pengelola secara langsung melalui WhatsApp.</p>
+              
+              <div class="p-3 bg-slate-50 rounded-xl text-xs space-y-1 mb-4 border border-slate-200">
+                <div><i class="fa-solid fa-building-user mr-1.5 text-[#D4AF37]"></i> <strong>Kantor Pengelola:</strong> Lantai 1 (Depan)</div>
+                <div><i class="fa-solid fa-clock mr-1.5 text-[#D4AF37]"></i> <strong>Jam Operasional:</strong> 08:00 - 20:00 WITA</div>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20Budi%20Santoso%20penghuni%20Kamar%20105%20ingin%20bertanya." target="_blank" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center space-x-2">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+                <span>Hubungi Admin via WhatsApp</span>
+              </a>
+              <button onclick="switchTab('keluhan')" class="w-full py-2.5 bg-[#D4AF37] hover:bg-[#C59B27] text-[#111827] font-bold text-xs rounded-xl shadow-md transition text-center">
+                <i class="fa-solid fa-comment-dots mr-1"></i> Buat Laporan Kerusakan
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==================== MODAL 1: CHECK-IN / TAMBAH PENGHUNI BARU ==================== -->
+  <div id="modalCheckIn" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-800"><i class="fa-solid fa-user-plus text-[#D4AF37] mr-2"></i>Check-In Penghuni Baru</h3>
+        <button onclick="closeModalCheckIn()" class="text-slate-400 hover:text-slate-600 text-lg">&times;</button>
+      </div>
+
+      <form onsubmit="saveCheckIn(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Pilih Kamar Kosong</label>
+          <select id="checkinKamarSelect" required class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">
+            <!-- Diisi dinamis oleh JS hanya kamar kosong -->
+          </select>
+          <span class="text-[11px] text-slate-400 mt-1 block">*Hanya menampilkan kamar yang berstatus kosong</span>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nama Lengkap Penghuni</label>
+          <input type="text" id="checkinNama" required placeholder="Contoh: Siska Melati" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nomor Telepon / WhatsApp</label>
+          <input type="text" id="checkinNoTelp" required placeholder="Contoh: 081234567890" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">
+          <span class="text-[11px] text-slate-400 mt-1 block">*Digunakan untuk tombol langsung hubungi WhatsApp</span>
+        </div>
+
+        <div class="flex space-x-2 pt-2">
+          <button type="button" onclick="closeModalCheckIn()" class="w-1/2 py-2.5 bg-slate-100 text-slate-600 rounded-xl text-xs font-bold hover:bg-slate-200 transition">Batal</button>
+          <button type="submit" class="w-1/2 py-2.5 bg-[#D4AF37] text-[#111827] rounded-xl text-xs font-extrabold hover:bg-[#C59B27] transition">Simpan Check-In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: EDIT / INPUT HARGA & DATA KAMAR ==================== -->
+  <div id="modalEditKamar" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <h3 id="modalEditTitle" class="font-bold text-slate-800">Edit Data Kamar 101</h3>
+        <button onclick="closeModalEditKamar()" class="text-slate-400 hover:text-slate-600 text-lg">&times;</button>
+      </div>
+
+      <form onsubmit="saveEditKamar(event)" class="space-y-4">
+        <input type="hidden" id="editKamarId">
+        
+        <div>
+          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Harga Sewa per Bulan (Rp)</label>
+          <input type="number" id="editHargaKamar" required class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Status Kamar</label>
+          <select id="editStatusKamar" onchange="togglePenghuniInput()" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">
+            <option value="terisi">Terisi (Ada Penghuni)</option>
+            <option value="kosong">Kosong (Siap Huni)</option>
+          </select>
+        </div>
+
+        <div id="groupPenghuni" class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nama Penghuni</label>
+            <input type="text" id="editNamaPenghuni" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-600 uppercase mb-1">No. WhatsApp / Telepon</label>
+            <input type="text" id="editNoTelp" placeholder="Contoh: 081234567890" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">
+          </div>
+        </div>
+
+        <div class="flex space-x-2 pt-2">
+          <button type="button" onclick="closeModalEditKamar()" class="w-1/2 py-2.5 bg-slate-100 text-slate-600 rounded-xl text-xs font-bold hover:bg-slate-200 transition">Batal</button>
+          <button type="submit" class="w-1/2 py-2.5 bg-[#D4AF37] text-[#111827] rounded-xl text-xs font-extrabold hover:bg-[#C59B27] transition">Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: INPUT KELUHAN ==================== -->
+  <div id="modalKeluhan" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <h3 class="font-bold text-slate-800">Buat Laporan Keluhan Baru</h3>
+        <button onclick="closeModalKeluhan()" class="text-slate-400 hover:text-slate-600 text-lg">&times;</button>
+      </div>
+
+      <form onsubmit="saveKeluhan(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Pilih Kamar</label>
+          <select id="inputKeluhanKamar" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm font-semibold focus:ring-2 focus:ring-[#D4AF37] focus:outline-none">
+            <!-- Generated by JS -->
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Rincian Keluhan / Kerusakan</label>
+          <textarea id="inputKeluhanTeks" rows="3" required placeholder="Contoh: Kran air kamar mandi bocor atau lampu mati..." class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-[#D4AF37] focus:outline-none"></textarea>
+        </div>
+
+        <!-- Tombol Bantuan Hubungi Admin WA di dalam modal pengaduan -->
+        <div class="pt-1">
+          <a id="modalWaAdminBtn" href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20ingin%20melaporkan%20kendala%20fasilitas%20kost." target="_blank" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-sm transition flex items-center justify-center space-x-2">
+            <i class="fa-brands fa-whatsapp text-sm"></i>
+            <span>Atau Chat Langsung Admin via WhatsApp</span>
+          </a>
+        </div>
+
+        <div class="flex space-x-2 pt-2">
+          <button type="button" onclick="closeModalKeluhan()" class="w-1/2 py-2.5 bg-slate-100 text-slate-600 rounded-xl text-xs font-bold hover:bg-slate-200 transition">Batal</button>
+          <button type="submit" class="w-1/2 py-2.5 bg-[#D4AF37] text-[#111827] rounded-xl text-xs font-extrabold hover:bg-[#C59B27] transition">Kirim Laporan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- JavaScript Logic -->
+  <script>
+    // 1. DATA STATE MANAGEMENT (10 KAMAR FLEXIBLE PRICING & WHATSAPP)
+    let roomsData = [
+      { id: 101, name: "Kamar 101", floor: 1, price: 1200000, status: "terisi", tenant: "Rian Ardianto", phone: "081234567810", dueDate: "15 Nov 2026", paymentStatus: "lunas" },
+      { id: 102, name: "Kamar 102", floor: 1, price: 1200000, status: "terisi", tenant: "Siti Rahma", phone: "081234567811", dueDate: "12 Nov 2026", paymentStatus: "lunas" },
+      { id: 103, name: "Kamar 103", floor: 1, price: 1350000, status: "kosong", tenant: "-", phone: "-", dueDate: "-", paymentStatus: "-" },
+      { id: 104, name: "Kamar 104", floor: 1, price: 1200000, status: "terisi", tenant: "Ahmad Fauzi", phone: "081234567813", dueDate: "05 Nov 2026", paymentStatus: "belum" },
+      { id: 105, name: "Kamar 105", floor: 1, price: 1400000, status: "terisi", tenant: "Budi Santoso", phone: "081234567814", dueDate: "10 Nov 2026", paymentStatus: "lunas" },
+      { id: 106, name: "Kamar 106", floor: 1, price: 1200000, status: "terisi", tenant: "Dewi Lestari", phone: "081234567815", dueDate: "18 Nov 2026", paymentStatus: "lunas" },
+      { id: 107, name: "Kamar 107", floor: 1, price: 1300000, status: "terisi", tenant: "Eko Prasetyo", phone: "081234567816", dueDate: "02 Nov 2026", paymentStatus: "belum" },
+      { id: 108, name: "Kamar 108", floor: 1, price: 1200000, status: "terisi", tenant: "Fikri Haikal", phone: "081234567817", dueDate: "20 Nov 2026", paymentStatus: "lunas" },
+      { id: 109, name: "Kamar 109", floor: 1, price: 1500000, status: "kosong", tenant: "-", phone: "-", dueDate: "-", paymentStatus: "-" },
+      { id: 110, name: "Kamar 110", floor: 1, price: 1250000, status: "terisi", tenant: "Gita Gutawa", phone: "081234567819", dueDate: "25 Nov 2026", paymentStatus: "lunas" }
+    ];
+
+    let keluhanData = [
+      { id: 1, kamar: "Kamar 104", isi: "Kran wastafel kamar mandi menetes terus", tanggal: "04 Nov 2026", status: "Proses" },
+      { id: 2, kamar: "Kamar 107", isi: "AC kurang dingin, perlu dibersihkan filter", tanggal: "03 Nov 2026", status: "Dalam Pengerjaan" }
+    ];
+
+    let currentUser = { role: "admin", name: "Admin (Pengelola)" };
+    let barChartInstance = null;
+    let doughnutChartInstance = null;
+
+    // 2. AUTHENTICATION & PUBLIC PORTAL
+    // Demo credentials: admin/owner/penghuni use password 1234.
+    // For production, replace client-side checks with server-side authentication.
+    let selectedTenantRoom = null;
+    // EDIT KONTAK: ganti nomor berikut dengan nomor WhatsApp resmi (format internasional tanpa +).
+    const FOURTWINS_WA = '6281234567890';
+
+    function updateDefaultUsername(defaultName) {
+      document.getElementById('loginUsername').value = defaultName;
+      document.getElementById('loginUsernameLabel').innerText =
+        document.querySelector('input[name="role"]:checked').value === 'penghuni' ? 'Nama Penghuni' : 'Nama Pengguna';
+      toggleTenantRoomField();
+    }
+
+    function toggleTenantRoomField() {
+      const role = document.querySelector('input[name="role"]:checked')?.value;
+      const field = document.getElementById('tenantRoomField');
+      const usernameLabel = document.getElementById('loginUsernameLabel');
+      field.classList.toggle('hidden', role !== 'penghuni');
+      usernameLabel.innerText = role === 'penghuni' ? 'Nama Penghuni' : 'Nama Pengguna';
+      if (role === 'penghuni') populateTenantRoomSelect();
+    }
+
+    function populateTenantRoomSelect() {
+      const select = document.getElementById('tenantRoomSelect');
+      const occupied = roomsData.filter(r => r.status === 'terisi');
+      select.innerHTML = '<option value="">Pilih kamar Anda</option>' +
+        occupied.map(r => `<option value="${r.id}">${r.name} — ${r.tenant}</option>`).join('');
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const role = document.querySelector('input[name="role"]:checked').value;
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const error = document.getElementById('loginError');
+      if (password !== "1234") {
+        error.innerText = 'Password salah. Silakan coba lagi.';
+        error.classList.remove('hidden');
+        return;
+      }
+      if (role === 'penghuni') {
+        const roomId = Number(document.getElementById('tenantRoomSelect').value);
+        selectedTenantRoom = roomsData.find(r => r.id === roomId && r.status === 'terisi');
+        if (!selectedTenantRoom) {
+          error.innerText = 'Silakan pilih kamar terdaftar Anda.';
+          error.classList.remove('hidden');
+          return;
+        }
+        if (username && username.toLowerCase() !== 'nama penghuni' &&
+            username.toLowerCase() !== selectedTenantRoom.tenant.toLowerCase()) {
+          error.innerText = 'Nama tidak sesuai dengan data kamar. Periksa kembali nama penghuni.';
+          error.classList.remove('hidden');
+          return;
+        }
+        currentUser = { role: 'penghuni', name: selectedTenantRoom.tenant };
+        updateTenantPortal();
+      } else {
+        currentUser = { role, name: username || (role === 'admin' ? 'Admin' : 'Owner') };
+      }
+      error.classList.add('hidden');
+      document.getElementById('loginPortal').classList.add('hidden');
+      document.getElementById('loginPortal').classList.remove('flex');
+      document.getElementById('appContainer').classList.remove('hidden');
+      document.getElementById('landingPage').classList.add('hidden');
+      setupRolePermissions();
+      renderAll();
+    }
+
+    function updateTenantPortal() {
+      const room = selectedTenantRoom;
+      if (!room) return;
+      document.getElementById('tenantWelcome').innerText = `Selamat Datang, ${room.tenant}!`;
+      document.getElementById('tenantRoomLabel').innerText = `${room.name} (Lantai ${room.floor})`;
+      document.getElementById('tenantRoomPrice').innerHTML = `${formatRupiah(room.price)} <span class="text-xs font-normal text-white">/bln</span>`;
+      const status = room.paymentStatus === 'lunas' ? 'LUNAS' : 'BELUM LUNAS';
+      const statusEl = document.getElementById('tenantPaymentStatus');
+      statusEl.innerText = status;
+      statusEl.className = `text-lg font-bold ${room.paymentStatus === 'lunas' ? 'text-emerald-600' : 'text-red-600'}`;
+      document.getElementById('tenantDueDate').innerText = `Jatuh tempo: ${room.dueDate}`;
+    }
+
+    function showLoginModal() {
+      document.getElementById('landingPage').classList.add('hidden');
+      document.getElementById('appContainer').classList.add('hidden');
+      document.getElementById('loginPortal').classList.remove('hidden');
+      document.getElementById('loginPortal').classList.add('flex');
+      document.getElementById('formLogin').reset();
+      document.querySelector('input[name="role"][value="admin"]').checked = true;
+      updateDefaultUsername('Admin (Pengelola)');
+      document.getElementById('loginPassword').value = '';
+      document.getElementById('loginError').classList.add('hidden');
+    }
+
+    function enterTenantPortal() { showLoginModal(); document.querySelector('input[name="role"][value="penghuni"]').checked = true; updateDefaultUsername('Nama Penghuni'); }
+
+    function returnToLanding() {
+      document.getElementById('loginPortal').classList.add('hidden');
+      document.getElementById('loginPortal').classList.remove('flex');
+      document.getElementById('appContainer').classList.add('hidden');
+      document.getElementById('landingPage').classList.remove('hidden');
+      currentUser = { role: 'admin', name: 'Admin (Pengelola)' };
+      selectedTenantRoom = null;
+    }
+
+    function renderPublicRoomCards() {
+      const container = document.getElementById('publicRoomGrid');
+      if (!container) return;
+      container.innerHTML = '';
+      const photoIds = ["1616486338812-3dadae4b4ace","1611892440504-42a792e24d32","1617104678098-de229db51175","1600210492486-724fe5c67fb0","1600607687939-ce8a6c25118c","1600607687920-4e2a09cf159d","1600566753086-00f18fb6b3ea","1600607687644-c7171b42498f","1616486029423-aaa4789e8c9a","1600566753190-17f0baa2a6c3"];
+      roomsData.forEach((room, index) => {
+        const available = room.status === 'kosong';
+        const card = document.createElement('article');
+        card.className = 'bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm lift-card';
+        const message = encodeURIComponent(`Halo FourTwins Kost, saya tertarik dengan ${room.name} dengan tarif ${formatRupiah(room.price)} per bulan. Mohon informasi lebih lanjut.`);
+        card.innerHTML = `
+          <div class="h-40 bg-cover bg-center" style="background-image:linear-gradient(0deg,rgba(15,23,42,.15),rgba(15,23,42,.02)),url('https://images.unsplash.com/photo-${photoIds[index]}?auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="p-5"><div class="flex items-center justify-between gap-2"><h3 class="font-extrabold text-slate-800">${room.name}</h3><span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full ${available ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500'}">${available ? 'TERSEDIA' : 'TERISI'}</span></div>
+          <p class="text-xs text-slate-500 mt-1">Lantai ${room.floor}</p><p class="text-xl font-black text-[#9A7418] mt-3">${formatRupiah(room.price)}<span class="text-xs font-medium text-slate-400"> / bulan</span></p>
+          <a ${available ? `href="https://wa.me/6281234567890?text=${message}" target="_blank" rel="noopener"` : 'href="#kontak"'} class="mt-4 block text-center rounded-xl py-2.5 text-xs font-extrabold ${available ? 'bg-[#D4AF37] text-[#111827] hover:bg-[#C59B27]' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}">${available ? 'Tanyakan / Pesan Kamar' : 'Saat ini Terisi'}</a></div>`;
+        container.appendChild(card);
+      });
+    }
+
+    function setupRolePermissions() {
+      const userBadgeIcon = document.getElementById('userBadgeIcon');
+      const currentUserName = document.getElementById('currentUserName');
+      const currentUserRole = document.getElementById('currentUserRole');
+      const adminNav = document.getElementById('adminNavLinks');
+      const penghuniNav = document.getElementById('penghuniNavLinks');
+      const btnTambahModal = document.getElementById('btnTambahModal');
+      currentUserName.innerText = currentUser.name;
+
+      if (currentUser.role === 'penghuni') {
+        currentUserRole.innerText = 'PENGHUNI KOST';
+        userBadgeIcon.innerHTML = '<i class="fa-solid fa-house-user"></i>';
+        adminNav.classList.add('hidden'); penghuniNav.classList.remove('hidden');
+        btnTambahModal.classList.add('hidden'); switchTab('tenant-view');
+      } else if (currentUser.role === 'pemilik') {
+        currentUserRole.innerText = 'PEMILIK (OWNER)';
+        userBadgeIcon.innerHTML = '<i class="fa-solid fa-crown text-[#D4AF37]"></i>';
+        adminNav.classList.remove('hidden'); penghuniNav.classList.add('hidden');
+        btnTambahModal.classList.remove('hidden'); switchTab('dashboard');
+      } else {
+        currentUserRole.innerText = 'ADMIN / PENGELOLA';
+        userBadgeIcon.innerHTML = '<i class="fa-solid fa-user-shield"></i>';
+        adminNav.classList.remove('hidden'); penghuniNav.classList.add('hidden');
+        btnTambahModal.classList.remove('hidden'); switchTab('dashboard');
+      }
+    }
+
+    // 3. NAVIGATION TAB SWITCHER
+    function switchTab(tabId) {
+      const tabs = ['dashboard', 'kamar', 'keuangan', 'keluhan', 'tenant-view'];
+      tabs.forEach(t => {
+        const viewEl = document.getElementById(`view-${t}`);
+        const navEl = document.getElementById(`nav-${t}`);
+        if (viewEl) viewEl.classList.add('hidden');
+        if (navEl) {
+          navEl.classList.remove('bg-[#D4AF37]', 'text-[#111827]', 'font-bold');
+          navEl.classList.add('text-slate-400');
+        }
+      });
+
+      const activeView = document.getElementById(`view-${tabId}`);
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      if (activeView) activeView.classList.remove('hidden');
+      if (activeNav) {
+        activeNav.classList.add('bg-[#D4AF37]', 'text-[#111827]', 'font-bold');
+        activeNav.classList.remove('text-slate-400');
+      }
+
+      const headerTitle = document.getElementById('headerTitle');
+      if (tabId === 'dashboard') headerTitle.innerText = "Ringkasan Dashboard";
+      if (tabId === 'kamar') headerTitle.innerText = "Daftar 10 Kamar & Harga";
+      if (tabId === 'keuangan') headerTitle.innerText = "Pencatatan Keuangan Manual";
+      if (tabId === 'keluhan') headerTitle.innerText = "Laporan Keluhan Facilities";
+      if (tabId === 'tenant-view') headerTitle.innerText = "Portal Penghuni Kost";
+    }
+
+    // 4. RENDERING FUNCTIONS
+    function renderAll() {
+      renderStats();
+      renderRoomGrid('all');
+      renderTableKeuangan();
+      renderKeluhan();
+      renderCharts();
+    }
+
+    function formatRupiah(number) {
+      return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number);
+    }
+
+    function renderStats() {
+      const terisi = roomsData.filter(r => r.status === 'terisi').length;
+      const kosong = roomsData.filter(r => r.status === 'kosong').length;
+      const totalPendapatan = roomsData.reduce((acc, curr) => curr.status === 'terisi' ? acc + curr.price : acc, 0);
+
+      document.getElementById('statTerisi').innerText = `${terisi} Kamar`;
+      document.getElementById('statKosong').innerText = `${kosong} Kamar`;
+      document.getElementById('statPendapatan').innerText = formatRupiah(totalPendapatan);
+    }
+
+    function renderRoomGrid(filter = 'all') {
+      const container = document.getElementById('roomGridContainer');
+      container.innerHTML = '';
+
+      let filteredRooms = roomsData;
+      if (filter === 'terisi') filteredRooms = roomsData.filter(r => r.status === 'terisi');
+      if (filter === 'kosong') filteredRooms = roomsData.filter(r => r.status === 'kosong');
+
+      filteredRooms.forEach(room => {
+        const isTerisi = room.status === 'terisi';
+        const card = document.createElement('div');
+        card.className = "bg-white rounded-2xl border border-slate-200 p-3.5 shadow-sm flex flex-col justify-between hover:border-[#D4AF37] transition lift-card";
+
+        // Format link WhatsApp (ganti 0 dengan 62 jika diawali 0)
+        let waLink = "#";
+        if (room.phone && room.phone !== "-") {
+          let cleanPhone = room.phone.startsWith('0') ? '62' + room.phone.slice(1) : room.phone;
+          waLink = `https://wa.me/${cleanPhone}?text=Halo%20${encodeURIComponent(room.tenant)},%20ini%20dari%20Pengelola%20FourTwins%20Kost.`;
+        }
+
+        card.innerHTML = `
+          <div>
+            <div class="room-photo rounded-xl mb-3 relative overflow-hidden" style="background-image: linear-gradient(0deg, rgba(15,23,42,.28), rgba(15,23,42,0)), url('https://images.unsplash.com/photo-${[
+              "1616486338812-3dadae4b4ace","1611892440504-42a792e24d32","1617104678098-de229db51175",
+              "1600210492486-724fe5c67fb0","1600607687939-ce8a6c25118c","1600607687920-4e2a09cf159d",
+              "1600566753086-00f18fb6b3ea","1600607687644-c7171b42498f","1616486029423-aaa4789e8c9a",
+              "1600566753190-17f0baa2a6c3"
+            ][roomsData.findIndex(r => r.id === room.id)]}?auto=format&fit=crop&w=700&q=78')">
+              <span class="absolute bottom-2 left-2 glass-chip text-white text-[9px] uppercase tracking-wider px-2 py-1 rounded-lg">FourTwins Living</span>
+            </div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-bold text-slate-800 text-sm">${room.name}</span>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${isTerisi ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}">
+                ${room.status}
+              </span>
+            </div>
+
+            <div class="space-y-1.5 text-xs text-slate-600 mb-4">
+              <div class="flex justify-between">
+                <span class="text-slate-400">Harga Sewa:</span>
+                <span class="font-bold text-[#111827]">${formatRupiah(room.price)}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400">Penghuni:</span>
+                <span class="font-semibold text-slate-700">${room.tenant}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-400">No. WhatsApp:</span>
+                <span class="font-medium text-slate-700">${room.phone}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            ${isTerisi && room.phone !== '-' ? `
+              <a href="${waLink}" target="_blank" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition flex items-center justify-center space-x-1.5 shadow-sm">
+                <i class="fa-brands fa-whatsapp text-sm"></i>
+                <span>Hubungi Penghuni</span>
+              </a>
+            ` : ''}
+
+            ${currentUser.role !== 'penghuni' ? `
+              <button onclick="openModalEditKamar(${room.id})" class="w-full py-2 bg-slate-100 hover:bg-[#D4AF37]/20 hover:text-[#111827] text-slate-700 font-bold text-xs rounded-xl border border-slate-200 transition flex items-center justify-center space-x-1">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>Edit Harga & Data</span>
+              </button>
+            ` : ''}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterKamar(type) {
+      renderRoomGrid(type);
+    }
+
+    function renderTableKeuangan() {
+      const tbody = document.getElementById('tableKeuanganBody');
+      tbody.innerHTML = '';
+
+      roomsData.forEach(room => {
+        let waLink = "#";
+        if (room.phone && room.phone !== "-") {
+          let cleanPhone = room.phone.startsWith('0') ? '62' + room.phone.slice(1) : room.phone;
+          waLink = `https://wa.me/${cleanPhone}?text=Halo%20${encodeURIComponent(room.tenant)},%20pengingat%20tagihan%20sewa%20di%20FourTwins%20Kost.`;
+        }
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 transition";
+        tr.innerHTML = `
+          <td class="p-4 font-bold text-slate-800">${room.name}</td>
+          <td class="p-4 font-medium">${room.tenant}</td>
+          <td class="p-4 font-mono text-slate-600">${room.phone}</td>
+          <td class="p-4 font-semibold text-[#111827]">${formatRupiah(room.price)}</td>
+          <td class="p-4">${room.dueDate}</td>
+          <td class="p-4">
+            ${room.paymentStatus === 'lunas' 
+              ? '<span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-[10px] font-bold">LUNAS</span>'
+              : room.paymentStatus === 'belum' 
+              ? '<span class="px-2 py-1 bg-red-100 text-red-700 rounded-lg text-[10px] font-bold">BELUM BAYAR</span>'
+              : '<span class="text-slate-400">-</span>'}
+          </td>
+          <td class="p-4 text-center">
+            <div class="flex items-center justify-center space-x-1.5">
+              ${room.status === 'terisi' && room.phone !== '-' ? `
+                <a href="${waLink}" target="_blank" class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[11px] font-bold transition flex items-center space-x-1" title="Kirim Pesan WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i>
+                  <span>WA</span>
+                </a>
+              ` : ''}
+              ${room.status === 'terisi' && currentUser.role !== 'penghuni' ? `
+                <button onclick="toggleStatusBayar(${room.id})" class="px-2.5 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-[11px] font-bold transition">
+                  Bayar
+                </button>
+              ` : '-'}
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function toggleStatusBayar(id) {
+      const room = roomsData.find(r => r.id === id);
+      if (room) {
+        room.paymentStatus = room.paymentStatus === 'lunas' ? 'belum' : 'lunas';
+        renderAll();
+      }
+    }
+
+    // 5. RENDERING KELUHAN
+    function renderKeluhan() {
+      const container = document.getElementById('keluhanList');
+      container.innerHTML = '';
+
+      keluhanData.forEach(k => {
+        const card = document.createElement('div');
+        card.className = "p-4 bg-slate-50 border border-slate-200 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4";
+        
+        let badgeClass = "bg-amber-100 text-amber-700";
+        if (k.status === 'Selesai') badgeClass = "bg-emerald-100 text-emerald-700";
+        if (k.status === 'Dalam Pengerjaan') badgeClass = "bg-blue-100 text-blue-700";
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-slate-800 text-xs">${k.kamar}</span>
+              <span class="text-[10px] text-slate-400">• Tanggal: ${k.tanggal}</span>
+            </div>
+            <p class="text-xs text-slate-600 mt-1">${k.isi}</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="px-2.5 py-1 text-[10px] font-bold rounded-lg ${badgeClass}">
+              ${k.status}
+            </span>
+            ${currentUser.role !== 'penghuni' ? `
+              <button onclick="ubahStatusKeluhan(${k.id})" class="px-3 py-1.5 bg-[#111827] hover:bg-slate-800 text-white rounded-lg text-[11px] font-bold transition flex items-center space-x-1">
+                <i class="fa-solid fa-rotate"></i>
+                <span>Ubah Status</span>
+              </button>
+            ` : ''}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function ubahStatusKeluhan(id) {
+      const keluhan = keluhanData.find(k => k.id === id);
+      if (!keluhan) return;
+
+      if (keluhan.status === 'Proses') {
+        keluhan.status = 'Dalam Pengerjaan';
+      } else if (keluhan.status === 'Dalam Pengerjaan') {
+        keluhan.status = 'Selesai';
+      } else {
+        keluhan.status = 'Proses';
+      }
+
+      renderKeluhan();
+    }
+
+    // 6. MODAL CHECK-IN PENGHUNI BARU
+    function openModalCheckIn() {
+      const select = document.getElementById('checkinKamarSelect');
+      select.innerHTML = '';
+      
+      const kamarKosong = roomsData.filter(r => r.status === 'kosong');
+      if (kamarKosong.length === 0) {
+        const opt = document.createElement('option');
+        opt.value = "";
+        opt.innerText = "Semua kamar saat ini sudah terisi!";
+        select.appendChild(opt);
+      } else {
+        kamarKosong.forEach(r => {
+          const opt = document.createElement('option');
+          opt.value = r.id;
+          opt.innerText = `${r.name} (Harga: ${formatRupiah(r.price)})`;
+          select.appendChild(opt);
+        });
+      }
+
+      document.getElementById('checkinNama').value = '';
+      document.getElementById('checkinNoTelp').value = '';
+      document.getElementById('modalCheckIn').classList.remove('hidden');
+    }
+
+    function closeModalCheckIn() {
+      document.getElementById('modalCheckIn').classList.add('hidden');
+    }
+
+    function saveCheckIn(event) {
+      event.preventDefault();
+      const kamarId = parseInt(document.getElementById('checkinKamarSelect').value);
+      const nama = document.getElementById('checkinNama').value;
+      const noTelp = document.getElementById('checkinNoTelp').value;
+
+      if (!kamarId) {
+        alert("Pilih kamar kosong terlebih dahulu!");
+        return;
+      }
+
+      const room = roomsData.find(r => r.id === kamarId);
+      if (room) {
+        room.status = 'terisi';
+        room.tenant = nama;
+        room.phone = noTelp;
+        room.dueDate = '05 Des 2026';
+        room.paymentStatus = 'lunas';
+      }
+
+      closeModalCheckIn();
+      renderAll();
+    }
+
+    // 7. MODAL EDIT HARGA & DATA KAMAR
+    function openModalEditKamar(id) {
+      const room = roomsData.find(r => r.id === id);
+      if (!room) return;
+
+      document.getElementById('editKamarId').value = room.id;
+      document.getElementById('modalEditTitle').innerText = `Edit Data ${room.name}`;
+      document.getElementById('editHargaKamar').value = room.price;
+      document.getElementById('editStatusKamar').value = room.status;
+      document.getElementById('editNamaPenghuni').value = room.tenant === '-' ? '' : room.tenant;
+      document.getElementById('editNoTelp').value = room.phone === '-' ? '' : room.phone;
+
+      togglePenghuniInput();
+      document.getElementById('modalEditKamar').classList.remove('hidden');
+    }
+
+    function closeModalEditKamar() {
+      document.getElementById('modalEditKamar').classList.add('hidden');
+    }
+
+    function togglePenghuniInput() {
+      const status = document.getElementById('editStatusKamar').value;
+      const groupPenghuni = document.getElementById('groupPenghuni');
+      if (status === 'kosong') {
+        groupPenghuni.classList.add('hidden');
+      } else {
+        groupPenghuni.classList.remove('hidden');
+      }
+    }
+
+    function saveEditKamar(event) {
+      event.preventDefault();
+      const id = parseInt(document.getElementById('editKamarId').value);
+      const newPrice = parseInt(document.getElementById('editHargaKamar').value);
+      const newStatus = document.getElementById('editStatusKamar').value;
+      const newTenant = document.getElementById('editNamaPenghuni').value;
+      const newNoTelp = document.getElementById('editNoTelp').value;
+
+      const room = roomsData.find(r => r.id === id);
+      if (room) {
+        room.price = newPrice;
+        room.status = newStatus;
+        if (newStatus === 'kosong') {
+          room.tenant = '-';
+          room.phone = '-';
+          room.dueDate = '-';
+          room.paymentStatus = '-';
+        } else {
+          room.tenant = newTenant || 'Penghuni Baru';
+          room.phone = newNoTelp || '081200000000';
+          room.dueDate = '10 Nov 2026';
+          room.paymentStatus = 'lunas';
+        }
+      }
+
+      closeModalEditKamar();
+      renderAll();
+    }
+
+    // 8. MODAL KELUHAN
+    function openModalKeluhanBaru() {
+      const select = document.getElementById('inputKeluhanKamar');
+      select.innerHTML = '';
+      roomsData.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r.name;
+        opt.innerText = r.name;
+        select.appendChild(opt);
+      });
+      document.getElementById('modalKeluhan').classList.remove('hidden');
+    }
+
+    function closeModalKeluhan() {
+      document.getElementById('modalKeluhan').classList.add('hidden');
+    }
+
+    function saveKeluhan(event) {
+      event.preventDefault();
+      const kamar = document.getElementById('inputKeluhanKamar').value;
+      const isi = document.getElementById('inputKeluhanTeks').value;
+
+      keluhanData.unshift({
+        id: Date.now(),
+        kamar: kamar,
+        isi: isi,
+        tanggal: "05 Nov 2026",
+        status: "Proses"
+      });
+
+      document.getElementById('inputKeluhanTeks').value = '';
+      closeModalKeluhan();
+      renderKeluhan();
+    }
+
+    // 9. CHART.JS VISUALIZATION
+    function renderCharts() {
+      const ctxBar = document.getElementById('barChartKamar').getContext('2d');
+      const labels = roomsData.map(r => r.name);
+      const prices = roomsData.map(r => r.price);
+
+      if (barChartInstance) barChartInstance.destroy();
+      barChartInstance = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Harga Sewa (Rp)',
+            data: prices,
+            backgroundColor: '#111827',
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { ticks: { callback: value => 'Rp ' + (value / 1000) + 'k' } }
+          }
+        }
+      });
+
+      const ctxDoughnut = document.getElementById('doughnutChartKamar').getContext('2d');
+      const terisi = roomsData.filter(r => r.status === 'terisi').length;
+      const kosong = roomsData.filter(r => r.status === 'kosong').length;
+
+      if (doughnutChartInstance) doughnutChartInstance.destroy();
+      doughnutChartInstance = new Chart(ctxDoughnut, {
+        type: 'doughnut',
+        data: {
+          labels: ['Terisi', 'Kosong'],
+          datasets: [{
+            data: [terisi, kosong],
+            backgroundColor: ['#10b981', '#f59e0b'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+    }
+
+    window.onload = function() {
+      document.getElementById('landingPage').classList.remove('hidden');
+      document.getElementById('loginPortal').classList.add('hidden');
+      document.getElementById('appContainer').classList.add('hidden');
+      renderAll();
+    };
+
+    function applyConfiguredWhatsAppNumber() {
+      document.querySelectorAll('a[href*="wa.me/"]').forEach(link => {
+        link.href = link.href.replace(/wa\.me\/\d+/, `wa.me/${FOURTWINS_WA}`);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyConfiguredWhatsAppNumber();
+      renderPublicRoomCards();
+      toggleTenantRoomField();
+    });
+
+  </script>
+</body>
+</html>
