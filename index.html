@@ -47,7 +47,20 @@
     .glass-chip { background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px); }
     .lift-card { transition: transform .22s ease, box-shadow .22s ease; }
     .lift-card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px rgba(15,23,42,.10); }
-    .landing-hero { background-image: linear-gradient(90deg,rgba(15,23,42,.92),rgba(15,23,42,.62)),url('https://raw.githubusercontent.com/custom-app-win/kost/main/hero.jpeg'); background-size:cover; background-position:center; }
+    
+    /* Hero Banner: Fit to width on mobile */
+    .landing-hero { 
+      background-image: linear-gradient(180deg, rgba(15,23,42,.7) 0%, rgba(15,23,42,.85) 100%), url('https://raw.githubusercontent.com/custom-app-win/kost/main/hero.jpeg'); 
+      background-size: 100% 100%; 
+      background-position: center; 
+      background-repeat: no-repeat;
+    }
+    @media (min-width: 768px) {
+      .landing-hero {
+        background-size: cover;
+      }
+    }
+
     .landing-pattern { background-image: radial-gradient(rgba(212,175,55,.18) 1px,transparent 1px); background-size:18px 18px; }
 
   </style>
@@ -58,49 +71,75 @@
   <section id="landingPage" class="min-h-screen bg-[#FAF8F5]">
     <nav class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3" onclick="returnToLanding();return false;">
-        <span class="w-11 h-11 rounded-xl bg-[#D4AF37] text-[#111827] flex items-center justify-center font-black text-xl">4T</span>
+        <!-- Logo Container diperbarui menggunakan logo square.png -->
+        <div class="w-12 h-12 rounded-xl bg-slate-900 border border-[#D4AF37]/40 flex items-center justify-center overflow-hidden shadow-sm">
+          <img src="https://raw.githubusercontent.com/custom-app-win/kost/main/logo%20square.png" alt="Logo FourTwins Kost" class="w-full h-full object-cover">
+        </div>
         <span><strong class="block tracking-wide text-lg">FOUR<span class="text-[#B68B20]">TWINS</span></strong><small class="text-[10px] tracking-[.22em] text-slate-500 uppercase">Kost Modern & Nyaman</small></span>
       </a>
-      <button onclick="showLoginModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-sm font-bold hover:border-[#D4AF37] hover:text-[#9A7418] transition"><i class="fa-solid fa-lock mr-2"></i>Login Admin / Owner / Penghuni</button>
+      <a href="#kontak" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs sm:text-sm font-bold hover:border-[#D4AF37] hover:text-[#9A7418] transition"><i class="fa-solid fa-location-dot mr-2"></i>Lokasi</a>
     </nav>
-    <div class="landing-hero min-h-[590px] flex items-center text-white">
-      <div class="max-w-7xl mx-auto w-full px-6 py-20">
-        <div class="max-w-2xl">
-          <span class="inline-flex items-center gap-2 glass-chip rounded-full px-4 py-2 text-xs font-bold tracking-widest uppercase text-[#F4D77D]"><i class="fa-solid fa-house"></i> Your Comfortable Living</span>
-          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mt-6">Temukan Hunian Nyaman di <span class="text-[#E4C15B]">FourTwins Kost</span></h1>
-          <p class="text-slate-200 text-base md:text-lg leading-relaxed mt-5 max-w-xl">Tempat tinggal modern dengan suasana nyaman, fasilitas terawat, dan layanan penghuni yang mudah diakses.</p>
-          <div class="flex flex-wrap gap-3 mt-8">
-            <button onclick="enterTenantPortal()" class="px-7 py-3.5 bg-[#D4AF37] hover:bg-[#C59B27] text-[#111827] font-extrabold rounded-xl shadow-lg transition"><i class="fa-solid fa-house-user mr-2"></i>Login Penghuni</button>
-            <a href="#fasilitas" class="px-7 py-3.5 border border-white/50 hover:bg-white/10 text-white font-bold rounded-xl transition">Jelajahi Fasilitas</a>
-          </div>
-          <div class="flex flex-wrap gap-8 mt-12 text-sm text-slate-200"><span><i class="fa-solid fa-wifi text-[#E4C15B] mr-2"></i>Wi-Fi</span><span><i class="fa-solid fa-snowflake text-[#E4C15B] mr-2"></i>AC</span><span><i class="fa-solid fa-shield-halved text-[#E4C15B] mr-2"></i>Lingkungan nyaman</span></div>
+
+    <!-- Hero Banner dengan Proporsi Teks & Lebar Foto Pas di Handphone (Tanpa Tombol Di Dalamnya) -->
+    <div class="landing-hero min-h-[340px] sm:min-h-[400px] md:min-h-[480px] flex items-center text-white">
+      <div class="max-w-7xl mx-auto w-full px-6 py-8 sm:py-12">
+        <div class="max-w-xl">
+          <span class="inline-flex items-center gap-2 glass-chip rounded-full px-3 py-1 text-[10px] sm:text-xs font-bold tracking-widest uppercase text-[#F4D77D]"><i class="fa-solid fa-house"></i> Your Comfortable Living</span>
+          <h1 class="text-xl sm:text-2xl md:text-5xl font-extrabold leading-snug sm:leading-tight mt-2 sm:mt-4">Temukan Hunian Nyaman di <span class="text-[#E4C15B]">FourTwins Kost</span></h1>
+          <p class="text-slate-200 text-xs sm:text-sm md:text-base leading-relaxed mt-2 sm:mt-3">Tempat tinggal modern dengan suasana nyaman, fasilitas terawat, dan layanan penghuni yang mudah diakses.</p>
+          <div class="flex flex-wrap gap-4 sm:gap-6 mt-4 sm:mt-6 text-[11px] sm:text-xs text-slate-200"><span><i class="fa-solid fa-wifi text-[#E4C15B] mr-1.5"></i>Wi-Fi</span><span><i class="fa-solid fa-snowflake text-[#E4C15B] mr-1.5"></i>AC</span><span><i class="fa-solid fa-shield-halved text-[#E4C15B] mr-1.5"></i>Lingkungan nyaman</span></div>
         </div>
       </div>
     </div>
-    <section id="fasilitas" class="max-w-7xl mx-auto px-6 py-16">
+
+    <!-- Posisi 3 Tombol Aksi di Luar/Bawah Hero Banner dengan Jarak Spasi (Tidak Bertumpuk/Menempel) -->
+    <div class="max-w-7xl mx-auto px-6 py-6 sm:py-8">
+      <div class="bg-white p-4 sm:p-5 rounded-2xl shadow-lg border border-slate-200 flex flex-wrap items-center justify-center sm:justify-start gap-3">
+        <a href="#kontak" class="flex-1 min-w-[130px] text-center px-4 py-3 bg-[#D4AF37] hover:bg-[#C59B27] text-[#111827] font-extrabold rounded-xl shadow-sm transition text-xs sm:text-sm"><i class="fa-solid fa-location-dot mr-2"></i>Lokasi</a>
+        <a href="#fasilitas" class="flex-1 min-w-[130px] text-center px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl transition text-xs sm:text-sm"><i class="fa-solid fa-compass mr-2"></i>Jelajahi Fasilitas</a>
+        <a href="#kontak" class="flex-1 min-w-[130px] text-center px-4 py-3 bg-[#111827] hover:bg-slate-800 text-white font-bold rounded-xl transition text-xs sm:text-sm"><i class="fa-solid fa-phone mr-2"></i>Kontak Kami</a>
+      </div>
+    </div>
+
+    <!-- Bagian Fasilitas / Experience dengan Gambar Baru -->
+    <section id="fasilitas" class="max-w-7xl mx-auto px-6 py-6">
       <div class="text-center mb-10"><p class="text-xs font-extrabold tracking-[.25em] text-[#B68B20] uppercase">FourTwins Experience</p><h2 class="text-3xl font-extrabold mt-2">Kenyamanan untuk Setiap Hari</h2><p class="text-slate-500 mt-3">Hunian praktis dengan fasilitas untuk mendukung aktivitas Anda.</p></div>
       <div class="grid md:grid-cols-3 gap-6">
-        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 lift-card"><img class="h-52 w-full object-cover" src="https://raw.githubusercontent.com/custom-app-win/kost/main/room.jpeg" alt="Interior ruang nyaman"><div class="p-5"><h3 class="font-extrabold text-lg">Interior Nyaman</h3><p class="text-sm text-slate-500 mt-2">Ruang tinggal tertata dengan suasana hangat dan modern.</p></div></article>
-        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 lift-card"><img class="h-52 w-full object-cover" src="https://raw.githubusercontent.com/custom-app-win/kost/main/room.jpeg" alt="Kamar modern"><div class="p-5"><h3 class="font-extrabold text-lg">Kamar Fungsional</h3><p class="text-sm text-slate-500 mt-2">Ruang pribadi untuk beristirahat dan beraktivitas.</p></div></article>
-        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 lift-card"><img class="h-52 w-full object-cover" src="https://raw.githubusercontent.com/custom-app-win/kost/main/room.jpeg" alt="Area hunian"><div class="p-5"><h3 class="font-extrabold text-lg">Lingkungan Terawat</h3><p class="text-sm text-slate-500 mt-2">Pengelolaan fasilitas dan layanan penghuni yang praktis.</p></div></article>
+        <!-- Interior Nyaman (interior.png) -->
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 lift-card">
+          <img class="h-52 w-full object-cover" src="https://raw.githubusercontent.com/custom-app-win/kost/main/interior.png" alt="Interior ruang nyaman">
+          <div class="p-5"><h3 class="font-extrabold text-lg">Interior Nyaman</h3><p class="text-sm text-slate-500 mt-2">Ruang tinggal tertata dengan suasana hangat dan modern.</p></div>
+        </article>
+        <!-- Lokasi Strategis (samarinda.png) -->
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 lift-card">
+          <img class="h-52 w-full object-cover" src="https://raw.githubusercontent.com/custom-app-win/kost/main/samarinda.png" alt="Lokasi strategis">
+          <div class="p-5"><h3 class="font-extrabold text-lg">Lokasi Strategis</h3><p class="text-sm text-slate-500 mt-2">Akses mudah dijangkau dan dekat dengan berbagai fasilitas publik.</p></div>
+        </article>
+        <!-- Lingkungan Nyaman (lingkungan.png) -->
+        <article class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 lift-card">
+          <img class="h-52 w-full object-cover" src="https://raw.githubusercontent.com/custom-app-win/kost/main/lingkungan.png" alt="Lingkungan nyaman">
+          <div class="p-5"><h3 class="font-extrabold text-lg">Lingkungan Terawat</h3><p class="text-sm text-slate-500 mt-2">Pengelolaan fasilitas dan layanan penghuni yang praktis.</p></div>
+        </article>
       </div>
     </section>
 
-    <section id="pilih-kamar" class="max-w-7xl mx-auto px-6 py-16">
+    <!-- Bagian Pilihan Kamar (2 kamar per baris pada tampilan handphone) -->
+    <section id="pilih-kamar" class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div><p class="text-xs font-extrabold tracking-[.25em] text-[#B68B20] uppercase">Pilihan Hunian</p><h2 class="text-3xl font-extrabold mt-2">Pilih Kamar Favorit Anda</h2><p class="text-slate-500 mt-2">Lihat pilihan kamar, tarif bulanan, dan status ketersediaan.</p></div>
         <a href="#kontak" class="text-sm font-bold text-[#9A7418] hover:underline">Tanya ketersediaan <i class="fa-solid fa-arrow-right ml-1"></i></a>
       </div>
-      <div id="publicRoomGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+      <div id="publicRoomGrid" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5"></div>
       <p class="text-xs text-slate-400 mt-4">*Tarif dan status kamar mengikuti data contoh aplikasi. Konfirmasi ketersediaan dan harga terbaru kepada pengelola.</p>
     </section>
+
     <section class="bg-white border-y border-slate-100">
       <div class="max-w-7xl mx-auto px-6 py-16">
         <div class="text-center mb-10"><p class="text-xs font-extrabold tracking-[.25em] text-[#B68B20] uppercase">Fasilitas & Informasi</p><h2 class="text-3xl font-extrabold mt-2">Semua yang Anda Butuhkan</h2></div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-slate-100"><i class="fa-solid fa-wifi text-2xl text-[#B68B20]"></i><h3 class="font-bold mt-3">Wi-Fi</h3><p class="text-sm text-slate-500 mt-1">Akses internet untuk aktivitas sehari-hari.</p></div>
           <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-slate-100"><i class="fa-regular fa-snowflake text-2xl text-[#B68B20]"></i><h3 class="font-bold mt-3">AC</h3><p class="text-sm text-slate-500 mt-1">Kenyamanan suhu di dalam kamar.</p></div>
-          <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-slate-100"><i class="fa-solid fa-bed text-2xl text-[#B68B20]"></i><h3 class="font-bold mt-3">Kamar Pribadi</h3><p class="text-sm text-slate-500 mt-1">Pilihan ruang pribadi dengan beberapa variasi tarif.</p></div>
+          <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-slate-100"><i class="fa-solid fa-map-pin text-2xl text-[#B68B20]"></i><h3 class="font-bold mt-3">Lokasi Strategis</h3><p class="text-sm text-slate-500 mt-1">Akses mudah dan dekat berbagai pusat aktivitas.</p></div>
           <div class="p-5 rounded-2xl bg-[#FAF8F5] border border-slate-100"><i class="fa-solid fa-headset text-2xl text-[#B68B20]"></i><h3 class="font-bold mt-3">Layanan Pengelola</h3><p class="text-sm text-slate-500 mt-1">Hubungi pengelola untuk informasi dan bantuan.</p></div>
         </div>
         <div class="grid md:grid-cols-2 gap-6 mt-8">
@@ -124,7 +163,12 @@
       </div>
     </section>
 
-    <footer class="bg-[#181A1D] text-slate-400 text-center px-6 py-7 text-xs">© 2026 FourTwins Kost. Stay in Comfort. <span class="block mt-2">Informasi alamat, nomor WhatsApp, tarif, dan fasilitas dapat disesuaikan oleh pengelola.</span></footer>
+    <!-- Tombol Login Akses Pengelola tersembunyi/opsional di Footer jika ingin masuk dashboard -->
+    <footer class="bg-[#181A1D] text-slate-400 text-center px-6 py-7 text-xs">
+      © 2026 FourTwins Kost. Stay in Comfort. 
+      <button onclick="showLoginModal()" class="block mx-auto mt-3 text-amber-400 hover:underline text-[11px] font-semibold"><i class="fa-solid fa-lock mr-1"></i>Login Pengelola / Admin</button>
+      <span class="block mt-2">Informasi alamat, nomor WhatsApp, tarif, dan fasilitas dapat disesuaikan oleh pengelola.</span>
+    </footer>
   </section>
 
   <!-- ==================== ADMIN / OWNER LOGIN ==================== -->
@@ -739,8 +783,6 @@
       document.getElementById('loginError').classList.add('hidden');
     }
 
-    function enterTenantPortal() { showLoginModal(); document.querySelector('input[name="role"][value="penghuni"]').checked = true; updateDefaultUsername('Nama Penghuni'); }
-
     function returnToLanding() {
       document.getElementById('loginPortal').classList.add('hidden');
       document.getElementById('loginPortal').classList.remove('flex');
@@ -757,13 +799,23 @@
       roomsData.forEach((room) => {
         const available = room.status === 'kosong';
         const card = document.createElement('article');
-        card.className = 'bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm lift-card';
+        card.className = 'bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm lift-card flex flex-col justify-between';
         const message = encodeURIComponent(`Halo FourTwins Kost, saya tertarik dengan ${room.name} dengan tarif ${formatRupiah(room.price)} per bulan. Mohon informasi lebih lanjut.`);
         card.innerHTML = `
-          <div class="h-40 bg-cover bg-center" style="background-image:linear-gradient(0deg,rgba(15,23,42,.15),rgba(15,23,42,.02)),url('https://raw.githubusercontent.com/custom-app-win/kost/main/room.jpeg')"></div>
-          <div class="p-5"><div class="flex items-center justify-between gap-2"><h3 class="font-extrabold text-slate-800">${room.name}</h3><span class="text-[10px] font-extrabold px-2.5 py-1 rounded-full ${available ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500'}">${available ? 'TERSEDIA' : 'TERISI'}</span></div>
-          <p class="text-xs text-slate-500 mt-1">Lantai ${room.floor}</p><p class="text-xl font-black text-[#9A7418] mt-3">${formatRupiah(room.price)}<span class="text-xs font-medium text-slate-400"> / bulan</span></p>
-          <a ${available ? `href="https://wa.me/6281234567890?text=${message}" target="_blank" rel="noopener"` : 'href="#kontak"'} class="mt-4 block text-center rounded-xl py-2.5 text-xs font-extrabold ${available ? 'bg-[#D4AF37] text-[#111827] hover:bg-[#C59B27]' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}">${available ? 'Tanyakan / Pesan Kamar' : 'Saat ini Terisi'}</a></div>`;
+          <div>
+            <div class="h-28 sm:h-40 bg-cover bg-center" style="background-image:linear-gradient(0deg,rgba(15,23,42,.15),rgba(15,23,42,.02)),url('https://raw.githubusercontent.com/custom-app-win/kost/main/room.jpeg')"></div>
+            <div class="p-3 sm:p-5">
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1">
+                <h3 class="font-extrabold text-slate-800 text-xs sm:text-base">${room.name}</h3>
+                <span class="text-[9px] sm:text-[10px] font-extrabold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full ${available ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500'}">${available ? 'TERSEDIA' : 'TERISI'}</span>
+              </div>
+              <p class="text-[11px] sm:text-xs text-slate-500 mt-1">Lantai ${room.floor}</p>
+              <p class="text-sm sm:text-xl font-black text-[#9A7418] mt-2 sm:mt-3">${formatRupiah(room.price)}<span class="text-[10px] sm:text-xs font-medium text-slate-400"> /bln</span></p>
+            </div>
+          </div>
+          <div class="p-3 sm:p-5 pt-0">
+            <a ${available ? `href="https://wa.me/6281234567890?text=${message}" target="_blank" rel="noopener"` : 'href="#kontak"'} class="block text-center rounded-xl py-2 sm:py-2.5 text-[11px] sm:text-xs font-extrabold ${available ? 'bg-[#D4AF37] text-[#111827] hover:bg-[#C59B27]' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}">${available ? 'Pesan Kamar' : 'Terisi'}</a>
+          </div>`;
         container.appendChild(card);
       });
     }
